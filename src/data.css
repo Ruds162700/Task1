@@ -1,0 +1,40 @@
+/* data.css */
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ensure it fills the whole viewport height */
+  }
+  
+  button {
+    margin-bottom: 20px; /* Add some space between button and data */
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1000; /* Ensure it's on top of everything else */
+  }
+  
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1001; /* Ensure it's on top of overlay */
+    display: none; /* Hide by default */
+  }
+  
+  .popup.active {
+    display: block; /* Show when active */
+  }
+  
