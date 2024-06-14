@@ -1,41 +1,8 @@
   import React, { useState } from 'react';
+  import { indianCities } from './statecitydata';
+  const Form = ({ model, setModel, persons, setPersons}) => {
 
-  const Form = ({ model, setModel, persons, setPersons }) => {
-
-    const indianCities = {
-      "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore"],
-      "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat", "Ziro"],
-      "Assam": ["Guwahati", "Silchar", "Dibrugarh", "Jorhat"],
-      "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur"],
-      "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Durg"],
-      "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa"],
-      "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
-      "Haryana": ["Faridabad", "Gurgaon", "Panipat", "Ambala"],
-      "Himachal Pradesh": ["Shimla", "Mandi", "Dharamshala", "Solan"],
-      "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],
-      "Karnataka": ["Bangalore", "Mysore", "Hubli", "Mangalore"],
-      "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],
-      "Madhya Pradesh": ["Bhopal", "Indore", "Jabalpur", "Gwalior"],
-      "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"],
-      "Manipur": ["Imphal", "Thoubal", "Bishnupur", "Churachandpur"],
-      "Meghalaya": ["Shillong", "Tura", "Jowai", "Nongpoh"],
-      "Mizoram": ["Aizawl", "Lunglei", "Saiha", "Champhai"],
-      "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang"],
-      "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Brahmapur"],
-      "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
-      "Rajasthan": ["Jaipur", "Jodhpur", "Kota", "Bikaner"],
-      "Sikkim": ["Gangtok", "Namchi", "Mangan", "Jorethang"],
-      "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],
-      "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],
-      "Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Ambassa"],
-      "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi"],
-      "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Haldwani"],
-      "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol"]
-    };
-
-
-
-
+ 
 
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
@@ -44,10 +11,8 @@
     const [birthdate, setBirthdate] = useState("");
     const [address, setAddress] = useState("");
     const [age, setAge] = useState(NaN);
-    const [allchecked, setAllChecked] = React.useState([]);
+    const [allchecked, setAllChecked] = useState([]);
     const [zipcode, setZipcode] = useState("");
-
-
 
     const handleChange = (e) => {
       if (e.target.checked) {
@@ -99,9 +64,23 @@
 
     const handleSubmit = (e) => {
       e.preventDefault();
-
-      // Add new person to persons state
-      setPersons([...persons, { fname: firstname, lname: lastname, age: age, address: address, skills: allchecked, zipcode: zipcode,state:state,city:city }]);
+      // Add new person data
+      const updated = [
+        ...persons,
+        {
+          id: new Date().getTime().toString(),
+          fname: firstname,
+          lname: lastname,
+          age: age,
+          address: address,
+          skills: allchecked,
+          zipcode: zipcode,
+          state: state,
+          city: city,
+          birthdate:birthdate,
+        }
+      ];
+    
       // Reset form fields
       setFirstName("");
       setLastName("");
@@ -112,11 +91,16 @@
       setZipcode("");
       setCity("");
       setState("");
+      setBirthdate("");
+    
+      // Update persons state and local storage
+      setPersons(updated);
+      localStorage.setItem("myData1", JSON.stringify(updated));
+    
       // Close the form
       setModel(false);
-
     };
-
+    
 
     const handleState = (e) => {
       setState(e.target.value);
@@ -171,7 +155,7 @@
           </label>
           <br />
 
-          <label>City:{state ? (<select value={city} onChange={handleCity}>
+          <label>City:{state ? (<select value={city} onChange={handleCity} required>
             <option value="">City</option>
             {
               indianCities[state].map((city, index) => (
@@ -188,8 +172,10 @@
 
 
 
-          <label>Zipcode: <input type='tel' maxLength={6} minLength={6} value={zipcode} onChange={handleZipcode} /></label>
+          <label>Zipcode: <input type='tel' maxLength={6} minLength={6} value={zipcode} onChange={handleZipcode} required /></label>
           <br />
+
+
           <button type="submit">Submit</button>
         </form>
       </div>
