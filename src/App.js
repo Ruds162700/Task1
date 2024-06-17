@@ -35,7 +35,7 @@ const App = () => {
         )}
       
       </div>
-      <div>
+      <div className="main-container">
         <Data
           model={model}
           setModel={setModel}

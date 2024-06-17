@@ -75,9 +75,10 @@ import EditForm from './EditForm';
   return (
 
     <div className='table'>
-      <label>
+      <div className='search'>
+      <label className='child'>
         SearchByName:
-        <input
+        <input 
           type='text'
           value={namesearch}
           onChange={(e) => {
@@ -88,7 +89,7 @@ import EditForm from './EditForm';
       </label>
       <br />
       <br />
-      <label>SearchByState:
+      <label className='child'>SearchByState:
         <select value={statesearch} onChange={(e) => setstateSearch(e.target.value)} required>
           <option value="">State</option>
           {
@@ -102,7 +103,7 @@ import EditForm from './EditForm';
       </label>
       <br />
       <br />
-      <label>SearchByCity:{statesearch ? (<select value={citysearch} onChange={(e) => setcitySearch(e.target.value)}>
+      <label className='child'>SearchByCity:{statesearch ? (<select value={citysearch} onChange={(e) => setcitySearch(e.target.value)}>
         <option value="">City</option>
         {
           indianCities[statesearch].map((city, index) => (
@@ -115,14 +116,15 @@ import EditForm from './EditForm';
       </label>
       <br />
       <br />
-
-      <button onClick={()=>{
+       </div>
+      <button className='clfb' onClick={()=>{
         setnameSearch("");
         setstateSearch("");
         setcitySearch("");
         }}>Clear Filter</button>
-
-
+     
+      <br/>
+      <br/>
       <table>
         <thead>
           <tr>
@@ -149,11 +151,11 @@ import EditForm from './EditForm';
               <td>{person.zipcode}</td>
               <td>{person.skills.join(', ')}</td>
               <td>
-                <button className='far fa-edit add-btn' onClick={(e)=>{
+                <button className='far fa-edit add-btn' id='edb' onClick={(e)=>{
                   setSelectedPersonId(person.id);
                   setEditModel(true);
                 }}>Edit</button>
-                <button className='far fa-trash-alt add-btn' onClick={() => openDeleteConfirmation(person.id)}>Delete</button>
+                <button className='far fa-trash-alt add-btn' id='dlb' onClick={() => openDeleteConfirmation(person.id)}>Delete</button>
               </td>
             </tr>
           ))}

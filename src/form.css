@@ -1,0 +1,29 @@
+input,select {
+    color: #1d1d1d;
+    max-width: 100%;
+    border: 1px solid #dfe3e6;
+    letter-spacing: 0.03rem;
+    outline: none;
+    background:#f1f2f3;
+    border-radius: 0.5rem;
+    margin-left: 15px;
+}
+#btnclose:hover{
+    border: 1px solid black;
+    border-radius: 5px;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); /* Adding a subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.sub{
+    position: relative;
+    left:180px;
+    width: 100px;
+}
+.sub:hover{
+    transform: scale(1.3);
+    box-shadow: 0 0 20px 0 rgba(153, 236, 249, 0.5); /* Adding a subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+
+}

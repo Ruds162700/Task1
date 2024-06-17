@@ -1,8 +1,9 @@
   import React, { useState } from 'react';
   import { indianCities } from './statecitydata';
+  import "./form.css";
   const Form = ({ model, setModel, persons, setPersons}) => {
 
- 
+  
 
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
@@ -55,7 +56,15 @@
     }
 
     const handlefnChange = (e) => {
-      setFirstName(e.target.value);
+      const efn = e.target.value;
+      const onlyLettersRegex = /^[A-Za-z\s]+$/;
+      if(onlyLettersRegex.test(efn)||efn===""){
+        setFirstName(efn);
+      }
+      else{
+        alert("Enter Valid name")
+      }
+
     };
 
     const handlelnChange = (e) => {
@@ -111,13 +120,14 @@
     return (
       <div>
         <form onSubmit={handleSubmit}>
-          <button className='btn-error' onClick={() => setModel(false)}>X</button>
+          
+          <button className='btn-error' id='btnclose'  onClick={() => setModel(false)}>X</button>
           <br />
-          <label className='inputs'>First Name:<input type="text" value={firstname} onChange={handlefnChange} required /></label>
+          <label className='inputs'>First Name:<input type="text" value={firstname} onChange={handlefnChange} required placeholder='Enter Your First Name' /></label>
           <br />
-          <label className='inputs'>Last Name:<input type="text" value={lastname} onChange={handlelnChange} required /></label>
+          <label className='inputs'>Last Name:<input type="text" value={lastname} onChange={handlelnChange} required placeholder='Enter Your Last Name'/></label>
           <br />
-          <label>DOB:<input type="date" value={birthdate} onChange={handleBirthChange} required /></label>
+          <label>DOB:<input type="date" value={birthdate} onChange={handleBirthChange}  /></label>
           <br />
           <label>Area Of Interest</label>
           <div>
@@ -138,7 +148,7 @@
 
           <label>Address:
             <br />
-            <textarea value={address} onChange={handleAddress} rows={4} cols={50} required/></label>
+            <textarea placeholder='Enter You Address' value={address} onChange={handleAddress} rows={4} cols={50} required/></label>
           <br />
 
           <label>State:
@@ -172,11 +182,11 @@
 
 
 
-          <label>Zipcode: <input type='tel' maxLength={6} minLength={6} value={zipcode} onChange={handleZipcode} required /></label>
+          <label>Zipcode: <input placeholder='Enter Your Zipcode' type='tel' maxLength={6} minLength={6} value={zipcode} onChange={handleZipcode} required /></label>
           <br />
 
 
-          <button type="submit">Submit</button>
+          <button className='sub' type="submit">Submit</button>
         </form>
       </div>
     );

@@ -156,8 +156,9 @@ const EditForm = ({
           <br/>
           <label>Zipcode: <input type='tel' maxLength={6} minLength={6} value={zipcode} onChange={handleZipcode} required /></label>
           <br />
+          <br/>
           <div className="form-group">
-            <button type="submit">Update</button>
+            <button className='sub' type="submit">Update</button>
           </div>
         </form>
       </div>
